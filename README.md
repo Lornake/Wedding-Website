@@ -17,10 +17,20 @@ assets/js/map-init.js    builds the map from map-config.js
 
 ## 1. Edit your content
 
-- **Map pins**: open `assets/js/map-config.js` and edit the `TRIP_STOPS` list —
-  each stop needs a name, category (`see` / `eat` / `stay` / `do`), lat/lng,
-  and a short note. Get coordinates by right-clicking a spot on
-  [Google Maps](https://www.google.com/maps) and copying the numbers shown.
+- **Map pins**: open `assets/js/map-config.js` and edit the `TRIP_STOPS`
+  list. The map page now has four tabs — Wedding Locations, Attractions,
+  Accommodations, and Restaurants — and each entry's `category` field is
+  what sorts it into the right one. To add a new pin, copy an existing
+  entry in the list and edit:
+  - `name` — shown as the pin title and in the sidebar list
+  - `category` — must be exactly `wedding`, `attractions`,
+    `accommodations`, or `restaurants`
+  - `lat` / `lng` — right-click the spot on
+    [Google Maps](https://www.google.com/maps) and click the coordinates
+    that pop up to copy them
+  - `note` — a short line shown in the pin's popup and the sidebar
+  There's no limit to how many you add per category, and the tabs, pin
+  colors, and sidebar list all update automatically.
 - **Itinerary / About**: edit the text directly in `itinerary.html` and
   `about.html` — each day or section is a plain HTML block, easy to copy and
   edit.

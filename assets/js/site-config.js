@@ -4,4 +4,4 @@
    Until you do, submissions will just show an error on the page.
    ============================================================ */
 
-const NOTIFY_FORM_ENDPOINT = "https://formspree.io/f/mqergjko";
+const NOTIFY_FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";

@@ -496,13 +496,141 @@ section {
 }
 
 /* ---------- map page ---------- */
-.map-page-header {
-  padding: 56px 0 32px;
+.map-layout {
+  display: flex;
+  gap: 28px;
+  padding: 40px 28px 56px;
+  align-items: flex-start;
+}
+
+.map-sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: sticky;
+  top: 96px;
+}
+
+.map-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+
+.map-tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  padding: 13px 16px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.map-tab::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tab-color, var(--ink));
+  flex-shrink: 0;
+}
+
+.map-tab:hover {
+  background: var(--whitewash-dim);
+}
+
+.map-tab.active {
+  background: var(--whitewash-dim);
+  border-left-color: var(--tab-color, var(--ink));
+  font-weight: 600;
+}
+
+.map-stop-list {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: calc(100vh - 320px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.map-stop-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  background: #fff;
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+
+.map-stop-item:hover {
+  border-color: var(--stop-color, var(--sea));
+  transform: translateX(2px);
+}
+
+.map-stop-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--stop-color, var(--ink));
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.map-stop-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.map-stop-name {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.map-stop-note {
+  font-size: 0.82rem;
+  color: var(--sea-deep);
+  line-height: 1.4;
+}
+
+.map-stop-empty {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--sea);
+  padding: 10px 2px;
+}
+
+.map-main {
+  flex: 1;
+  min-width: 0;
 }
 
 .map-shell {
   width: 100%;
-  height: 620px;
+  height: 640px;
   border: var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -512,30 +640,6 @@ section {
 #map {
   width: 100%;
   height: 100%;
-}
-
-.map-legend {
-  display: flex;
-  gap: 22px;
-  flex-wrap: wrap;
-  margin: 22px 0 0;
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  letter-spacing: 0.02em;
-  color: var(--sea-deep);
-}
-
-.map-legend span {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.legend-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-block;
 }
 
 .map-note {
@@ -594,7 +698,37 @@ footer.site-footer .wrap {
   }
 
   .map-shell {
-    height: 440px;
+    height: 380px;
+  }
+
+  .map-layout {
+    flex-direction: column;
+    padding: 24px 20px 40px;
+    gap: 18px;
+  }
+
+  .map-sidebar {
+    width: 100%;
+    position: static;
+  }
+
+  .map-tabs {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .map-tab {
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+  }
+
+  .map-tab.active {
+    border-bottom-color: var(--tab-color, var(--ink));
+  }
+
+  .map-stop-list {
+    max-height: 320px;
   }
 
   .itinerary-day {

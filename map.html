@@ -21,59 +21,34 @@
       Puglia, Late September
     </a>
     <nav class="primary-nav">
-      <a href="index.html" class="nav-link">Home</a>
-      <div class="nav-dropdown">
-        <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-          The Trip
-          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1L6 7L11 1" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
-        <div class="nav-dropdown-menu">
-          <a href="map.html">
-            Map
-            <span class="item-desc">Every stop, pinned</span>
-          </a>
-          <a href="itinerary.html">
-            Itinerary
-            <span class="item-desc">Day by day</span>
-          </a>
-          <a href="about.html">
-            About the trip
-            <span class="item-desc">Dates, logistics, notes</span>
-          </a>
-        </div>
-      </div>
+      <a href="map.html" class="nav-link active">Map</a>
+      <a href="itinerary.html" class="nav-link">Itinerary</a>
+      <a href="about.html" class="nav-link">About</a>
     </nav>
   </div>
 </header>
 
 <main>
-  <section class="map-page-header">
-    <div class="wrap">
-      <p class="section-eyebrow">Interactive</p>
-      <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin: 0 0 12px;">Every stop, pinned.</h2>
-      <p style="color: var(--sea-deep); max-width: 60ch; margin: 0;">Click a pin for the note on that stop. Colors mark what kind of stop it is — see the legend below the map.</p>
-    </div>
-  </section>
+  <div class="map-layout wrap">
+    <aside class="map-sidebar">
+      <div class="map-tabs" id="map-tabs" role="tablist" aria-label="Location categories">
+        <!-- populated by map-init.js from CATEGORY_ORDER -->
+      </div>
+      <div class="map-stop-list" id="map-stop-list">
+        <!-- populated by map-init.js for the active category -->
+      </div>
+    </aside>
 
-  <div class="wrap">
-    <div class="map-shell">
-      <div id="map"></div>
-    </div>
-
-    <div class="map-legend">
-      <span><span class="legend-dot" style="background:#a4502b;"></span>See</span>
-      <span><span class="legend-dot" style="background:#c6862e;"></span>Eat</span>
-      <span><span class="legend-dot" style="background:#2c5f74;"></span>Stay</span>
-      <span><span class="legend-dot" style="background:#6e7f4b;"></span>Do</span>
-    </div>
-
-    <div class="map-note" id="map-key-warning" style="display:none;">
-      No Google Maps API key is set yet. Open <code>assets/js/map-config.js</code> and replace
-      <code>YOUR_API_KEY_HERE</code> with your own key — see <code>README.md</code> for how to get one for free.
+    <div class="map-main">
+      <div class="map-shell">
+        <div id="map"></div>
+      </div>
+      <div class="map-note" id="map-key-warning" style="display:none;">
+        No Google Maps API key is set yet. Open <code>assets/js/map-config.js</code> and replace
+        <code>YOUR_API_KEY_HERE</code> with your own key — see <code>README.md</code> for how to get one for free.
+      </div>
     </div>
   </div>
-
-  <div class="stone-wall" style="margin-top: 56px;"></div>
 </main>
 
 <footer class="site-footer">
@@ -91,6 +66,36 @@
     document.getElementById("map-key-warning").style.display = "block";
     document.getElementById("map").innerHTML =
       '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-family:var(--font-mono);color:#1c2b33;text-align:center;padding:24px;">Add your Google Maps API key in assets/js/map-config.js to load the map here.</div>';
+
+    // Still build the tabs + list so you can preview the layout without a key.
+    const tabsEl = document.getElementById("map-tabs");
+    CATEGORY_ORDER.forEach((cat, i) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "map-tab" + (i === 0 ? " active" : "");
+      btn.textContent = CATEGORY_LABELS[cat] || cat;
+      btn.style.setProperty("--tab-color", CATEGORY_COLORS[cat] || "#1c2b33");
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".map-tab").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderFallbackList(cat);
+      });
+      tabsEl.appendChild(btn);
+    });
+
+    function renderFallbackList(category) {
+      const listEl = document.getElementById("map-stop-list");
+      listEl.innerHTML = "";
+      TRIP_STOPS.filter((s) => s.category === category).forEach((stop) => {
+        const item = document.createElement("div");
+        item.className = "map-stop-item";
+        item.style.setProperty("--stop-color", CATEGORY_COLORS[stop.category] || "#1c2b33");
+        item.innerHTML = `<span class="map-stop-dot"></span><span class="map-stop-text"><span class="map-stop-name">${stop.name}</span><span class="map-stop-note">${stop.note || ""}</span></span>`;
+        listEl.appendChild(item);
+      });
+    }
+
+    renderFallbackList(CATEGORY_ORDER[0]);
   } else {
     const script = document.createElement("script");
     script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=marker&callback=initTripMap&v=weekly`;
