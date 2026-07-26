@@ -11,8 +11,8 @@
   --sea-deep: #1b4356;
   --sea: #2c5f74;
   --sea-light: #6f9aad;
-  --whitewash: #f7f6f1;
-  --whitewash-dim: #efece3;
+  --whitewash: #dde6cd;
+  --whitewash-dim: #cdd8b8;
   --limestone: #ddd2bc;
   --olive: #6e7f4b;
   --olive-dark: #4d5a35;
@@ -285,17 +285,14 @@ nav.primary-nav {
   font-family: var(--font-display);
   font-size: 0.98rem;
   font-weight: 600;
-  color: var(--ink);
-  text-decoration: none;
+  color: var(--sea-deep);
+  text-decoration: underline;
   width: fit-content;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.15s ease, color 0.15s ease;
 }
 
 .map-stop-name:hover,
 .map-stop-name:focus-visible {
-  color: var(--sea-deep);
-  border-bottom-color: currentColor;
+  color: var(--ink);
 }
 
 .map-stop-note {
@@ -345,6 +342,67 @@ nav.primary-nav {
   background: rgba(28, 43, 51, 0.08);
   padding: 1px 5px;
   border-radius: 2px;
+}
+
+/* ---------- generic content page (calendar / FAQ / registry) ---------- */
+.page-content {
+  padding: 40px 28px 64px;
+}
+
+.page-content h1 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin: 0 0 28px;
+}
+
+.day-block,
+.faq-item,
+.registry-item {
+  border: var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+
+.day-block h2,
+.faq-question,
+.registry-item-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin: 0 0 10px;
+}
+
+.event-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.event-list li {
+  padding: 6px 0;
+  border-top: var(--border);
+}
+
+.event-list li:first-child {
+  border-top: none;
+}
+
+.event-time {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--sea-deep);
+  margin-right: 10px;
+}
+
+.faq-answer,
+.registry-item-note {
+  margin: 0;
+  color: var(--sea-deep);
+}
+
+.registry-item .btn {
+  margin-top: 12px;
 }
 
 /* ---------- footer ---------- */
