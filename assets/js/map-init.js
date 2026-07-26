@@ -24,17 +24,39 @@ function makePinIcon(color) {
   });
 }
 
+// Builds a link that opens the stop in the visitor's default maps app.
+// iOS -> Apple Maps, Android -> whatever app answers the "geo:" intent
+// (shows a chooser if more than one is installed), everything else ->
+// Google Maps in the browser. There's no single URL scheme that every
+// platform's default maps app agrees on, so we sniff the platform.
+function getMapsUrl(stop) {
+  const { lat, lng, name } = stop;
+  const label = encodeURIComponent(name);
+  const ua = (navigator.userAgent || navigator.vendor || "").toLowerCase();
+  const isIOS = /iphone|ipad|ipod/.test(ua);
+  const isAndroid = /android/.test(ua);
+
+  if (isIOS) {
+    return `https://maps.apple.com/?ll=${lat},${lng}&q=${label}`;
+  }
+  if (isAndroid) {
+    return `geo:${lat},${lng}?q=${lat},${lng}(${label})`;
+  }
+  return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+}
+
 function popupHtml(stop) {
   const color = CATEGORY_COLORS[stop.category] || "#1c2b33";
+  const mapsUrl = getMapsUrl(stop);
   return `
     <div style="font-family: 'Public Sans', sans-serif; max-width: 220px; padding: 2px 0;">
       <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: ${color}; margin-bottom: 4px;">
         ${CATEGORY_LABELS[stop.category] || stop.category}
       </div>
-      <div style="font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; color: #1c2b33; margin-bottom: 6px;">
-        ${stop.name}
-      </div>
-      <div style="font-size: 13px; color: #2c5f74; line-height: 1.4;">
+      <a href="${mapsUrl}" target="_blank" rel="noopener" style="font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; color: #1c2b33; margin-bottom: 6px; text-decoration: none; border-bottom: 1px solid rgba(28,43,51,0.35); display: inline-block;">
+        ${stop.name} ↗
+      </a>
+      <div style="font-size: 13px; color: #2c5f74; line-height: 1.4; margin-top: 4px;">
         ${stop.note || ""}
       </div>
     </div>
@@ -130,21 +152,40 @@ function renderStopList(category) {
   }
 
   stops.forEach((stop) => {
-    const item = document.createElement("button");
-    item.type = "button";
+    // A plain <button> can't legally contain a link, so the row is a
+    // div acting as a button (pans the map) with a real <a> inside it
+    // (opens the default maps app) for the name.
+    const item = document.createElement("div");
     item.className = "map-stop-item";
+    item.setAttribute("role", "button");
+    item.tabIndex = 0;
     item.style.setProperty("--stop-color", CATEGORY_COLORS[stop.category] || "#1c2b33");
     item.innerHTML = `
       <span class="map-stop-dot"></span>
       <span class="map-stop-text">
-        <span class="map-stop-name">${stop.name}</span>
+        <a class="map-stop-name" href="${getMapsUrl(stop)}" target="_blank" rel="noopener">${stop.name}</a>
         <span class="map-stop-note">${stop.note || ""}</span>
       </span>
     `;
-    item.addEventListener("click", () => {
+
+    function panToStop() {
       map.setView([stop.lat, stop.lng], 14);
       openStopInfo(stop);
+    }
+
+    item.addEventListener("click", (e) => {
+      // Let clicks on the name link open the maps app on their own;
+      // don't also hijack them into panning the embedded map.
+      if (e.target.closest("a")) return;
+      panToStop();
     });
+    item.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        panToStop();
+      }
+    });
+
     listEl.appendChild(item);
   });
 }
