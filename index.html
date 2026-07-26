@@ -3,105 +3,66 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Puglia, Late September — A Trip</title>
-<meta name="description" content="A trip through Puglia: trulli towns, the Adriatic coast, olive groves, and where to eat." />
+<title>Coming Soon</title>
+<meta name="description" content="This site is a work in progress. Leave your email to be notified when it's ready." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css" />
+<link rel="stylesheet" href="assets/css/landing.css" />
 </head>
-<body>
+<body class="landing-body">
 
-<header class="site-header">
-  <div class="wrap">
-    <a href="index.html" class="brand">
-      <svg class="brand-mark" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2 L20 11 L20 22 L4 22 L4 11 Z" fill="#a4502b"/>
-        <circle cx="12" cy="6" r="1.4" fill="#f7f6f1"/>
-      </svg>
-      Puglia, Late September
-    </a>
-    <nav class="primary-nav">
-      <a href="index.html" class="nav-link active">Home</a>
-      <div class="nav-dropdown">
-        <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-          The Trip
-          <svg viewBox="0 0 12 8" fill="none"><path d="M1 1L6 7L11 1" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
-        <div class="nav-dropdown-menu">
-          <a href="map.html">
-            Map
-            <span class="item-desc">Every stop, pinned</span>
-          </a>
-          <a href="itinerary.html">
-            Itinerary
-            <span class="item-desc">Day by day</span>
-          </a>
-          <a href="about.html">
-            About the trip
-            <span class="item-desc">Dates, logistics, notes</span>
-          </a>
-        </div>
-      </div>
-    </nav>
+<div class="lang-toggle" role="group" aria-label="Language">
+  <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true" aria-label="English">
+    <svg viewBox="0 0 24 16" width="26" height="18"><g>
+      <rect width="24" height="16" fill="#B22234"/>
+      <g fill="#fff"><rect y="1.23" width="24" height="1.23"/><rect y="3.69" width="24" height="1.23"/><rect y="6.15" width="24" height="1.23"/><rect y="8.62" width="24" height="1.23"/><rect y="11.08" width="24" height="1.23"/><rect y="13.54" width="24" height="1.23"/></g>
+      <rect width="10" height="8.62" fill="#3C3B6E"/>
+    </g></svg>
+  </button>
+  <button type="button" class="lang-btn" data-lang="it" aria-pressed="false" aria-label="Italiano">
+    <svg viewBox="0 0 24 16" width="26" height="18">
+      <rect width="8" height="16" fill="#009246"/>
+      <rect x="8" width="8" height="16" fill="#fff"/>
+      <rect x="16" width="8" height="16" fill="#CE2B37"/>
+    </svg>
+  </button>
+</div>
+
+<main class="coming-soon">
+  <div class="coming-soon-image-wrap">
+    <img src="assets/img/wip-hero.webp" alt="Kittens exploring the inside of an open desktop computer" class="coming-soon-image" />
   </div>
-</header>
 
-<main>
-  <section class="hero hero-image">
-    <img src="assets/img/wip-hero.webp" alt="Kittens exploring the inside of an open desktop computer" class="hero-image-bg" />
-    <div class="hero-image-overlay"></div>
-    <div class="wrap hero-image-content">
-      <p class="hero-eyebrow hero-eyebrow-light">Puglia, Italy — Sep 20–30</p>
-      <h1 class="hero-image-title">Work in progress.</h1>
-      <p class="lede lede-light">
-        This site is still being wired up — check back soon for the map,
-        itinerary, and everything else.
-      </p>
-      <div class="hero-actions">
-        <a href="map.html" class="btn btn-primary">Open the map</a>
-        <a href="itinerary.html" class="btn btn-ghost btn-ghost-light">See the itinerary</a>
-      </div>
-    </div>
-  </section>
+  <div class="coming-soon-content wrap">
+    <h1 class="ruby-text" data-i18n="wip">Work in progress</h1>
+    <p class="coming-soon-prompt" data-i18n="prompt">Please put your email in the box below to be notified when the website is done.</p>
 
-  <div class="stone-wall"></div>
+    <form id="notify-form" class="notify-form" novalidate>
+      <input
+        type="email"
+        id="notify-email"
+        name="email"
+        class="notify-input"
+        data-i18n-placeholder="emailPlaceholder"
+        placeholder="you@example.com"
+        required
+        autocomplete="email"
+      />
+      <button type="submit" class="btn btn-primary notify-submit" data-i18n="submit">Notify me</button>
+    </form>
+    <p id="notify-status" class="notify-status" role="status" aria-live="polite"></p>
 
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <p class="section-eyebrow">Where this goes</p>
-        <h2>Three pages, one plan.</h2>
-        <p>Everything on this site is editable — swap in your own stops, dates, and notes as the plan changes.</p>
-      </div>
-      <div class="card-grid">
-        <div class="card">
-          <span class="tag">Interactive</span>
-          <h3>The map</h3>
-          <p>Every highlighted stop — towns, restaurants, places to stay — pinned and color-coded, with a note on each one.</p>
-        </div>
-        <div class="card">
-          <span class="tag">Day by day</span>
-          <h3>Itinerary</h3>
-          <p>The rough shape of the ten days, in order, so nobody has to ask "wait, where are we on Tuesday."</p>
-        </div>
-        <div class="card">
-          <span class="tag">Reference</span>
-          <h3>About the trip</h3>
-          <p>Flights, driving notes, packing reminders — the logistics that are easy to forget between now and September.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <label class="premium-box">
+      <input type="checkbox" id="premium-checkbox" class="premium-checkbox" />
+      <span class="premium-checkmark" aria-hidden="true"></span>
+      <span class="premium-label" data-i18n="premium">Premium subscription</span>
+    </label>
+  </div>
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <span>Puglia, Late September</span>
-    <span>Built for the trip, not for anyone else.</span>
-  </div>
-</footer>
-
-<script src="assets/js/nav.js"></script>
+<script src="assets/js/site-config.js"></script>
+<script src="assets/js/landing.js"></script>
 </body>
 </html>

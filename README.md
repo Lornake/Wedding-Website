@@ -25,7 +25,28 @@ assets/js/map-init.js    builds the map from map-config.js
   `about.html` — each day or section is a plain HTML block, easy to copy and
   edit.
 
-## 2. Get a free Google Maps API key
+## 2. Set up the "notify me" email log (landing page)
+
+The landing page (`index.html`) is a coming-soon splash: your photo, "Work in
+progress," and an email signup box. Submissions need somewhere to go — this
+site uses [Formspree](https://formspree.io), a free form backend with a
+dashboard only you can log into (and it emails you every submission too).
+
+1. Go to [formspree.io](https://formspree.io) and create a free account.
+2. Click **New Form**, name it anything (e.g. "Site signups"), and set the
+   recipient email to wherever you want notifications sent.
+3. Formspree gives you an endpoint that looks like
+   `https://formspree.io/f/abcdwxyz`. Copy it.
+4. Open `assets/js/site-config.js` and replace the placeholder value of
+   `NOTIFY_FORM_ENDPOINT` with your real endpoint.
+5. Every submission now appears in your Formspree dashboard (login required)
+   and lands in your inbox. The free plan covers 50 submissions/month, which
+   is plenty for a "notify me" box.
+
+The checkbox under the email form ("Premium subscription") is decorative —
+it just toggles visually and isn't wired to anything.
+
+## 3. Get a free Google Maps API key
 
 1. Go to [console.cloud.google.com](https://console.cloud.google.com/) and
    create a project (or use an existing one).
@@ -43,7 +64,7 @@ covers a small personal site like this one — you're very unlikely to be
 charged anything for normal traffic. You'll need a credit card on file to
 activate the API, but that's a Google requirement, not a cost.
 
-## 3. Host it for free
+## 4. Host it for free
 
 Either of these work well for a static site like this:
 
@@ -59,7 +80,7 @@ Either of these work well for a static site like this:
    needed.
 2. Netlify gives you a live URL immediately.
 
-## 4. Point your Cloudflare domain at it
+## 5. Point your Cloudflare domain at it
 
 Your domain stays registered with Cloudflare — you're just telling it where
 to send visitors. In the Cloudflare dashboard, go to your domain's **DNS**
