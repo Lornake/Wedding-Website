@@ -18,72 +18,31 @@
 const GOOGLE_MAPS_API_KEY = "YOUR_API_KEY_HERE";
 
 // Roughly centers the map on Puglia on first load.
-const MAP_CENTER = { lat: 40.75, lng: 17.35 };
+const MAP_CENTER = { lat: 40.351447, lng: 18.175153 };
 const MAP_ZOOM = 8;
 
 const TRIP_STOPS = [
   {
-    name: "Masseria Il Frantoio",
+    name: "Torre del Paco",
     category: "wedding",
-    lat: 40.76,
-    lng: 17.61,
-    note: "Ceremony and reception venue — working olive farm just outside Ostuni.",
+    lat: 40.347278,
+    lng: 18.179814,
+    note: "Ceremony and reception venue",
   },
   {
     name: "Alberobello",
     category: "attractions",
     lat: 40.7844,
     lng: 17.2378,
-    note: "The trulli district — cone-roofed stone houses, UNESCO listed.",
+    note: "The Trulle, cone-roofed stone houses, UNESCO listed",
   },
+
   {
-    name: "Ostuni",
+    name: "Torre dell'Orso",
     category: "attractions",
-    lat: 40.7302,
-    lng: 17.5793,
-    note: "The 'White City' on a hilltop. Best explored at sunset.",
-  },
-  {
-    name: "Polignano a Mare",
-    category: "attractions",
-    lat: 41.0,
-    lng: 17.2199,
-    note: "Cliffside town over the Adriatic. Swim at Lama Monachile beach.",
-  },
-  {
-    name: "Grotte di Castellana",
-    category: "attractions",
-    lat: 40.8814,
-    lng: 17.1656,
-    note: "Underground cave system, guided tours run most of the day.",
-  },
-  {
-    name: "Masseria Il Frantoio — Rooms",
-    category: "accommodations",
-    lat: 40.76,
-    lng: 17.611,
-    note: "On-site rooms at the venue, book directly for the wedding block.",
-  },
-  {
-    name: "Ostuni old town B&B",
-    category: "accommodations",
-    lat: 40.7295,
-    lng: 17.58,
-    note: "Walkable to the old town, good option for guests without a car.",
-  },
-  {
-    name: "Trattoria Terra Madre",
-    category: "restaurants",
-    lat: 40.7833,
-    lng: 17.24,
-    note: "Orecchiette and local wine, walking distance from the trulli.",
-  },
-  {
-    name: "Osteria del Tempo Perso",
-    category: "restaurants",
-    lat: 40.731,
-    lng: 17.5805,
-    note: "Cave-cellar restaurant in Ostuni's old town, book ahead.",
+    lat: 40.273305,
+    lng: 18.428250,
+    note: "Best beach in the Mediterranean, but accordingly crowded",
   },
 ];
 
