@@ -147,6 +147,7 @@
 
 /* ---------- premium checkbox (visual only, does nothing) ---------- */
 .premium-box {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 10px;
