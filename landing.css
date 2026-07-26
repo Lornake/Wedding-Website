@@ -1,0 +1,296 @@
+/* ============================================================
+   LANDING PAGE — coming soon splash
+   ============================================================ */
+
+:root {
+  --ruby: #9b1b30;
+  --ruby-dark: #7a1526;
+}
+
+.landing-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- language toggle ---------- */
+.lang-toggle {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  gap: 8px;
+  background: rgba(247, 246, 241, 0.85);
+  backdrop-filter: blur(6px);
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(28, 43, 51, 0.12);
+}
+
+.lang-btn {
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  padding: 3px;
+  cursor: pointer;
+  line-height: 0;
+  opacity: 0.55;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.lang-btn svg {
+  display: block;
+  border-radius: 2px;
+}
+
+.lang-btn:hover {
+  opacity: 0.85;
+}
+
+.lang-btn.active {
+  opacity: 1;
+  border-color: var(--sea);
+}
+
+/* ---------- image, letterboxed so it reads as "zoomed out" ---------- */
+.coming-soon-image-wrap {
+  width: 100%;
+  height: 60vh;
+  min-height: 340px;
+  background: var(--whitewash-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.coming-soon-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* ---------- content below the image ---------- */
+.coming-soon-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 28px 72px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.ruby-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  color: var(--ruby);
+  margin: 0 0 16px;
+  line-height: 1.05;
+}
+
+.coming-soon-prompt {
+  font-size: 1.02rem;
+  color: var(--sea-deep);
+  margin: 0 0 28px;
+  max-width: 42ch;
+}
+
+/* ---------- notify form ---------- */
+.notify-form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 420px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.notify-input {
+  flex: 1;
+  min-width: 220px;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  padding: 13px 16px;
+  border: 1px solid rgba(28, 43, 51, 0.25);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+}
+
+.notify-input:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: 1px;
+}
+
+.notify-submit {
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+.notify-status {
+  margin: 14px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  min-height: 1.2em;
+  color: var(--olive-dark);
+}
+
+.notify-status.error {
+  color: var(--ruby);
+}
+
+/* ---------- premium checkbox (visual only, does nothing) ---------- */
+.premium-box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 36px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.premium-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.premium-checkmark {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid rgba(28, 43, 51, 0.4);
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.premium-checkmark::after {
+  content: "";
+  width: 6px;
+  height: 10px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg) translate(-1px, -1px);
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+.premium-checkbox:checked + .premium-checkmark {
+  background: var(--sea);
+  border-color: var(--sea);
+}
+
+.premium-checkbox:checked + .premium-checkmark::after {
+  opacity: 1;
+}
+
+.premium-checkbox:focus-visible + .premium-checkmark {
+  outline: 2px solid var(--sea);
+  outline-offset: 2px;
+}
+
+.premium-label {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sea-deep);
+}
+
+/* ---------- sneak-peek panel (unlocked after 5 clicks on the premium box) ---------- */
+.sneak-peek-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 200;
+  width: min(340px, 88vw);
+  height: 100%;
+  background: var(--whitewash);
+  border-left: var(--border);
+  box-shadow: -12px 0 32px rgba(28, 43, 51, 0.18);
+  padding: 64px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.35s ease;
+}
+
+.sneak-peek-panel.open {
+  transform: translateX(0);
+}
+
+.sneak-peek-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--sea-deep);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.sneak-peek-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin: 0 0 8px;
+}
+
+.sneak-peek-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--ruby);
+  margin: 0 0 14px;
+  line-height: 1.15;
+}
+
+.sneak-peek-text {
+  font-size: 0.95rem;
+  color: var(--sea-deep);
+  margin: 0 0 24px;
+}
+
+.sneak-peek-link {
+  align-self: flex-start;
+  border-radius: var(--radius);
+}
+
+@media (max-width: 520px) {
+  .lang-toggle {
+    top: 12px;
+    right: 12px;
+  }
+
+  .coming-soon-image-wrap {
+    height: 46vh;
+    min-height: 260px;
+  }
+
+  .notify-form {
+    flex-direction: column;
+  }
+
+  .notify-submit {
+    width: 100%;
+    justify-content: center;
+  }
+}
