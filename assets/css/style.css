@@ -1,0 +1,422 @@
+/* ============================================================
+   PUGLIA TRIP — design tokens
+   Palette drawn from the region itself: whitewashed trulli,
+   the Adriatic, olive groves, sun-baked limestone, and the
+   ochre/rust glaze of Grottaglie pottery.
+   ============================================================ */
+
+:root {
+  /* color */
+  --ink: #1c2b33;
+  --sea-deep: #1b4356;
+  --sea: #2c5f74;
+  --sea-light: #6f9aad;
+  --whitewash: #f7f6f1;
+  --whitewash-dim: #efece3;
+  --limestone: #ddd2bc;
+  --olive: #6e7f4b;
+  --olive-dark: #4d5a35;
+  --ochre: #c6862e;
+  --rust: #a4502b;
+
+  /* type */
+  --font-display: "Fraunces", "Iowan Old Style", serif;
+  --font-body: "Public Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* layout */
+  --max-width: 1120px;
+  --radius: 3px;
+  --border: 1px solid rgba(28, 43, 51, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--whitewash);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ---------- stone-wall divider (signature texture) ----------
+   A rough approximation of pietra a secco dry-stone coursing,
+   used as a section break instead of a plain <hr>. */
+.stone-wall {
+  height: 14px;
+  width: 100%;
+  background-image:
+    repeating-linear-gradient(90deg,
+      rgba(28,43,51,0.10) 0px, rgba(28,43,51,0.10) 1px,
+      transparent 1px, transparent 64px),
+    repeating-linear-gradient(90deg,
+      rgba(28,43,51,0.07) 0px, rgba(28,43,51,0.07) 1px,
+      transparent 1px, transparent 41px);
+  background-color: var(--limestone);
+  opacity: 0.55;
+}
+
+/* ---------- header / nav ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--whitewash);
+  border-bottom: var(--border);
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  text-decoration: none;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+nav.primary-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  transition: background 0.15s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: var(--whitewash-dim);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 13px 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--ink);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--whitewash);
+}
+
+.btn-primary:hover {
+  background: var(--sea-deep);
+  border-color: var(--sea-deep);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-ghost:hover {
+  background: var(--whitewash-dim);
+}
+
+/* ---------- map page ---------- */
+.map-layout {
+  display: flex;
+  gap: 28px;
+  padding: 40px 28px 56px;
+  align-items: flex-start;
+}
+
+.map-sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: sticky;
+  top: 96px;
+}
+
+.map-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+
+.map-tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  padding: 13px 16px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.map-tab::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tab-color, var(--ink));
+  flex-shrink: 0;
+}
+
+.map-tab:hover {
+  background: var(--whitewash-dim);
+}
+
+.map-tab.active {
+  background: var(--whitewash-dim);
+  border-left-color: var(--tab-color, var(--ink));
+  font-weight: 600;
+}
+
+.map-stop-list {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: calc(100vh - 320px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.map-stop-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  background: #fff;
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+
+.map-stop-item:hover {
+  border-color: var(--stop-color, var(--sea));
+  transform: translateX(2px);
+}
+
+.map-stop-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--stop-color, var(--ink));
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.map-stop-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.map-stop-name {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.map-stop-note {
+  font-size: 0.82rem;
+  color: var(--sea-deep);
+  line-height: 1.4;
+}
+
+.map-stop-empty {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--sea);
+  padding: 10px 2px;
+}
+
+.map-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.map-shell {
+  width: 100%;
+  height: 640px;
+  border: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--limestone);
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.map-note {
+  margin-top: 16px;
+  padding: 16px 18px;
+  background: rgba(198, 134, 46, 0.1);
+  border: 1px solid rgba(198, 134, 46, 0.35);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.map-note code {
+  font-family: var(--font-mono);
+  background: rgba(28, 43, 51, 0.08);
+  padding: 1px 5px;
+  border-radius: 2px;
+}
+
+/* ---------- footer ---------- */
+footer.site-footer {
+  border-top: var(--border);
+  padding: 40px 0;
+  margin-top: 40px;
+}
+
+footer.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--sea);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 720px) {
+  .site-header .wrap {
+    height: 64px;
+  }
+
+  nav.primary-nav {
+    gap: 0;
+  }
+
+  .nav-link {
+    padding: 8px 9px;
+    font-size: 0.7rem;
+  }
+
+  .map-shell {
+    height: 380px;
+  }
+
+  .map-layout {
+    flex-direction: column;
+    padding: 24px 20px 40px;
+    gap: 18px;
+  }
+
+  .map-sidebar {
+    width: 100%;
+    position: static;
+  }
+
+  .map-tabs {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .map-tab {
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+  }
+
+  .map-tab.active {
+    border-bottom-color: var(--tab-color, var(--ink));
+  }
+
+  .map-stop-list {
+    max-height: 320px;
+  }
+}
+
+/* accessibility */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+  }
+}
