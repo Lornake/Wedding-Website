@@ -286,6 +286,16 @@ nav.primary-nav {
   font-size: 0.98rem;
   font-weight: 600;
   color: var(--ink);
+  text-decoration: none;
+  width: fit-content;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.map-stop-name:hover,
+.map-stop-name:focus-visible {
+  color: var(--sea-deep);
+  border-bottom-color: currentColor;
 }
 
 .map-stop-note {
@@ -407,7 +417,8 @@ footer.site-footer .wrap {
 
 /* accessibility */
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+[role="button"]:focus-visible {
   outline: 2px solid var(--sea);
   outline-offset: 2px;
 }
