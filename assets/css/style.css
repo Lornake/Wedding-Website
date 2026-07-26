@@ -20,9 +20,9 @@
   --rust: #a4502b;
 
   /* type */
-  --font-display: "Fraunces", "Iowan Old Style", serif;
-  --font-body: "Public Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "Xanh Mono", "Iowan Old Style", serif;
+  --font-body: "Inconsolata", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "Inconsolata", ui-monospace, monospace;
 
   /* layout */
   --max-width: 1120px;
