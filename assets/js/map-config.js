@@ -43,6 +43,34 @@ const TRIP_STOPS = [
     lng: 18.428250,
     note: "Best beach in the Mediterranean, but accordingly crowded",
   },
+  {
+    name: "Otranto",
+    category: "attractions",
+    lat: 40.1479,
+    lng: 18.4868,
+    note: "Old town on the Adriatic coast",
+  },
+  {
+    name: "Otranto Cathedral",
+    category: "attractions",
+    lat: 40.14580,
+    lng: 18.49100,
+    note: "Cathedral in Otranto's old town, known for its floor mosaic",
+  },
+  {
+    name: "Spiaggia della Punticeddha",
+    category: "attractions",
+    lat: 40.2565,
+    lng: 18.4445,
+    note: "Beach near Torre Sant'Andrea — pin is approximate, double-check on the map",
+  },
+  {
+    name: "L'Ultima Spiaggia delle Cesine",
+    category: "attractions",
+    lat: 40.3465,
+    lng: 18.3600,
+    note: "Beach bordering the Cesine nature reserve — pin is approximate, double-check on the map",
+  },
 ];
 
 const CATEGORY_COLORS = {

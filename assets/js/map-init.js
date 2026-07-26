@@ -53,7 +53,7 @@ function popupHtml(stop) {
       <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: ${color}; margin-bottom: 4px;">
         ${CATEGORY_LABELS[stop.category] || stop.category}
       </div>
-      <a href="${mapsUrl}" target="_blank" rel="noopener" style="font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; color: #1c2b33; margin-bottom: 6px; text-decoration: none; border-bottom: 1px solid rgba(28,43,51,0.35); display: inline-block;">
+      <a href="${mapsUrl}" target="_blank" rel="noopener" style="font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; color: #1b4356; margin-bottom: 6px; text-decoration: underline; display: inline-block;">
         ${stop.name} ↗
       </a>
       <div style="font-size: 13px; color: #2c5f74; line-height: 1.4; margin-top: 4px;">
