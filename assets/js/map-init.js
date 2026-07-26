@@ -1,62 +1,33 @@
 // Builds the map, drops one pin per entry in TRIP_STOPS, and wires
 // up the category tabs + sidebar list on the map page.
 // TRIP_STOPS / CATEGORY_* are defined in map-config.js.
+// Uses Leaflet + OpenStreetMap tiles — no API key, no billing account.
 
 let map;
-let infoWindow;
 const markersByCategory = {};
 let activeCategory = CATEGORY_ORDER[0];
 
-function initTripMap() {
-  const mapEl = document.getElementById("map");
-  if (!mapEl) return;
-
-  map = new google.maps.Map(mapEl, {
-    center: MAP_CENTER,
-    zoom: MAP_ZOOM,
-    mapId: "PUGLIA_TRIP_MAP",
-    disableDefaultUI: false,
-    streetViewControl: false,
-    fullscreenControl: true,
+function makePinIcon(color) {
+  return L.divIcon({
+    className: "",
+    html: `<div style="
+      width:16px; height:16px;
+      border-radius:50% 50% 50% 0;
+      transform: rotate(-45deg);
+      background:${color};
+      border:2px solid #f7f6f1;
+      box-shadow:0 2px 6px rgba(28,43,51,0.35);
+    "></div>`,
+    iconSize: [16, 16],
+    iconAnchor: [8, 16],
+    popupAnchor: [0, -16],
   });
-
-  infoWindow = new google.maps.InfoWindow();
-
-  CATEGORY_ORDER.forEach((cat) => (markersByCategory[cat] = []));
-
-  TRIP_STOPS.forEach((stop) => {
-    const color = CATEGORY_COLORS[stop.category] || "#1c2b33";
-
-    const pin = document.createElement("div");
-    pin.style.width = "16px";
-    pin.style.height = "16px";
-    pin.style.borderRadius = "50% 50% 50% 0";
-    pin.style.transform = "rotate(-45deg)";
-    pin.style.background = color;
-    pin.style.border = "2px solid #f7f6f1";
-    pin.style.boxShadow = "0 2px 6px rgba(28,43,51,0.35)";
-
-    const marker = new google.maps.marker.AdvancedMarkerElement({
-      position: { lat: stop.lat, lng: stop.lng },
-      title: stop.name,
-      content: pin,
-    });
-
-    marker.addListener("click", () => openStopInfo(stop, marker));
-
-    stop._marker = marker;
-    if (!markersByCategory[stop.category]) markersByCategory[stop.category] = [];
-    markersByCategory[stop.category].push(stop);
-  });
-
-  setActiveCategory(CATEGORY_ORDER[0]);
-  buildTabs();
 }
 
-function openStopInfo(stop, marker) {
+function popupHtml(stop) {
   const color = CATEGORY_COLORS[stop.category] || "#1c2b33";
-  infoWindow.setContent(`
-    <div style="font-family: 'Public Sans', sans-serif; max-width: 220px; padding: 4px 2px;">
+  return `
+    <div style="font-family: 'Public Sans', sans-serif; max-width: 220px; padding: 2px 0;">
       <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: ${color}; margin-bottom: 4px;">
         ${CATEGORY_LABELS[stop.category] || stop.category}
       </div>
@@ -67,8 +38,47 @@ function openStopInfo(stop, marker) {
         ${stop.note || ""}
       </div>
     </div>
-  `);
-  infoWindow.open(map, marker);
+  `;
+}
+
+function initTripMap() {
+  const mapEl = document.getElementById("map");
+  if (!mapEl) return;
+
+  map = L.map(mapEl, {
+    center: [MAP_CENTER.lat, MAP_CENTER.lng],
+    zoom: MAP_ZOOM,
+  });
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+
+  CATEGORY_ORDER.forEach((cat) => (markersByCategory[cat] = []));
+
+  TRIP_STOPS.forEach((stop) => {
+    const color = CATEGORY_COLORS[stop.category] || "#1c2b33";
+
+    const marker = L.marker([stop.lat, stop.lng], {
+      icon: makePinIcon(color),
+      title: stop.name,
+    });
+
+    marker.bindPopup(popupHtml(stop));
+
+    stop._marker = marker;
+    if (!markersByCategory[stop.category]) markersByCategory[stop.category] = [];
+    markersByCategory[stop.category].push(stop);
+  });
+
+  setActiveCategory(CATEGORY_ORDER[0]);
+  buildTabs();
+}
+
+function openStopInfo(stop) {
+  if (!stop._marker) return;
+  stop._marker.openPopup();
 }
 
 function setActiveCategory(category) {
@@ -78,19 +88,21 @@ function setActiveCategory(category) {
   CATEGORY_ORDER.forEach((cat) => {
     const isActive = cat === category;
     (markersByCategory[cat] || []).forEach((stop) => {
-      stop._marker.map = isActive ? map : null;
+      if (isActive) {
+        stop._marker.addTo(map);
+      } else {
+        map.removeLayer(stop._marker);
+      }
     });
   });
 
   // fit the map to the visible pins
   const stops = markersByCategory[category] || [];
   if (stops.length === 1) {
-    map.setCenter({ lat: stops[0].lat, lng: stops[0].lng });
-    map.setZoom(13);
+    map.setView([stops[0].lat, stops[0].lng], 13);
   } else if (stops.length > 1) {
-    const bounds = new google.maps.LatLngBounds();
-    stops.forEach((s) => bounds.extend({ lat: s.lat, lng: s.lng }));
-    map.fitBounds(bounds, 60);
+    const bounds = L.latLngBounds(stops.map((s) => [s.lat, s.lng]));
+    map.fitBounds(bounds, { padding: [60, 60] });
   }
 
   renderStopList(category);
@@ -130,9 +142,8 @@ function renderStopList(category) {
       </span>
     `;
     item.addEventListener("click", () => {
-      map.panTo({ lat: stop.lat, lng: stop.lng });
-      map.setZoom(14);
-      openStopInfo(stop, stop._marker);
+      map.setView([stop.lat, stop.lng], 14);
+      openStopInfo(stop);
     });
     listEl.appendChild(item);
   });
@@ -157,4 +168,4 @@ function buildTabs() {
   });
 }
 
-window.initTripMap = initTripMap;
+document.addEventListener("DOMContentLoaded", initTripMap);

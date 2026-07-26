@@ -1,6 +1,8 @@
 /* ============================================================
-   EDIT THIS FILE to change your Google Maps API key and your
-   pinned locations. Nothing else in the site needs to change.
+   EDIT THIS FILE to change your pinned locations.
+   Nothing else in the site needs to change — the map itself
+   runs on Leaflet + OpenStreetMap, so no API key or billing
+   account is needed.
 
    HOW TO ADD A LOCATION:
    Copy one of the entries in TRIP_STOPS below, paste it back into
@@ -13,9 +15,6 @@
                  and click the coordinates that pop up to copy them
      - note:     short text shown in the pin's popup and in the list
    ============================================================ */
-
-// Paste your Google Maps API key here (see README.md for how to get one).
-const GOOGLE_MAPS_API_KEY = "YOUR_API_KEY_HERE";
 
 // Roughly centers the map on Puglia on first load.
 const MAP_CENTER = { lat: 40.351447, lng: 18.175153 };
