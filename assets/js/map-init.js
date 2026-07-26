@@ -49,11 +49,11 @@ function popupHtml(stop) {
   const color = CATEGORY_COLORS[stop.category] || "#1c2b33";
   const mapsUrl = getMapsUrl(stop);
   return `
-    <div style="font-family: 'Public Sans', sans-serif; max-width: 220px; padding: 2px 0;">
-      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: ${color}; margin-bottom: 4px;">
+    <div style="font-family: 'Inconsolata', monospace; max-width: 220px; padding: 2px 0;">
+      <div style="font-family: 'Inconsolata', monospace; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: ${color}; margin-bottom: 4px;">
         ${CATEGORY_LABELS[stop.category] || stop.category}
       </div>
-      <a href="${mapsUrl}" target="_blank" rel="noopener" style="font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; color: #1b4356; margin-bottom: 6px; text-decoration: underline; display: inline-block;">
+      <a href="${mapsUrl}" target="_blank" rel="noopener" style="font-family: 'Xanh Mono', serif; font-size: 16px; font-weight: 600; color: #1b4356; margin-bottom: 6px; text-decoration: underline; display: inline-block;">
         ${stop.name} ↗
       </a>
       <div style="font-size: 13px; color: #2c5f74; line-height: 1.4; margin-top: 4px;">
