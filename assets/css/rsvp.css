@@ -1,0 +1,114 @@
+/* ============================================================
+   RSVP PAGE
+   ============================================================ */
+
+.rsvp-intro {
+  color: var(--sea-deep);
+  max-width: 62ch;
+  margin: 0 0 28px;
+}
+
+.rsvp-form {
+  background: #fff;
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.rsvp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rsvp-field label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.required-mark {
+  color: var(--rust);
+}
+
+.rsvp-field input,
+.rsvp-field textarea {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  padding: 11px 13px;
+  border: 1px solid rgba(28, 43, 51, 0.25);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+}
+
+.rsvp-field input:focus-visible,
+.rsvp-field textarea:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: 1px;
+}
+
+.rsvp-field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 16px;
+}
+
+.rsvp-confirm-warning {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ruby, #9b1b30);
+}
+
+.rsvp-disclaimer {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--sea);
+  margin: 0;
+  padding-top: 4px;
+  border-top: var(--border);
+}
+
+.rsvp-submit {
+  align-self: flex-start;
+}
+
+.rsvp-status {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  min-height: 1.2em;
+  color: var(--olive-dark);
+}
+
+.rsvp-status.error {
+  color: var(--ruby, #9b1b30);
+}
+
+.rsvp-counter {
+  margin-top: 28px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--sea-deep);
+}
+
+#rsvp-counter-number {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 620px) {
+  .rsvp-field-grid {
+    grid-template-columns: 1fr;
+  }
+}
