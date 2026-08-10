@@ -13,4 +13,4 @@ const NOTIFY_FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
    through Formspree — nothing personal is ever written into
    this git repo or shown to other visitors.
    ============================================================ */
-const RSVP_FORM_ENDPOINT = "https://formspree.io/f/YOUR_RSVP_FORM_ID";
+const RSVP_FORM_ENDPOINT = "https://formspree.io/f/xaeweboe";
