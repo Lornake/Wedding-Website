@@ -22,7 +22,7 @@ const MAP_ZOOM = 8;
 
 const TRIP_STOPS = [
   {
-    name: "Torre del Paco",
+    name: "Torre del Parco",
     category: "wedding",
     lat: 40.347278,
     lng: 18.179814,
