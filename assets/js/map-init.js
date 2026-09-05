@@ -96,6 +96,18 @@ function initTripMap() {
 
   setActiveCategory(CATEGORY_ORDER[0]);
   buildTabs();
+
+  // Leaflet measures its container's size once, at init. On mobile,
+  // things like webfonts loading or the browser's address bar
+  // collapsing can finish resizing the page *after* that measurement,
+  // leaving the map thinking it's a different size than it really is —
+  // which shows up as blank/grey tiles outside the (wrong) measured
+  // area. Re-measuring after load and on resize fixes it.
+  window.addEventListener("load", () => map.invalidateSize());
+  window.addEventListener("orientationchange", () => {
+    setTimeout(() => map.invalidateSize(), 200);
+  });
+  window.addEventListener("resize", () => map.invalidateSize());
 }
 
 function openStopInfo(stop) {
