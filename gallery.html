@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Xanh+Mono:ital@0;1&family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=2" />
+<style>
+  /* Gallery-specific styles. Feel free to move these into style.css later. */
+  .upload-box {
+    border: 2px dashed currentColor;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    margin: 2rem 0;
+  }
+  .upload-box input[type="file"] {
+    display: block;
+    margin: 1rem auto;
+  }
+  #upload-status {
+    min-height: 1.5em;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 2rem;
+  }
+  .gallery-grid img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    display: block;
+  }
+  .gallery-empty {
+    opacity: 0.7;
+    font-style: italic;
+  }
+  .lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    padding: 2rem;
+    cursor: zoom-out;
+  }
+  .lightbox-overlay.active {
+    display: flex;
+  }
+  .lightbox-overlay img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+<header class="site-header">
+<div class="wrap">
+<a href="index.html" class="brand">Kayla &amp; Lorenzo</a>
+<nav class="primary-nav">
+<a href="map.html" class="nav-link">Map</a>
+<a href="calendar.html" class="nav-link">Calendar</a>
+<a href="faq.html" class="nav-link">FAQ</a>
+<a href="rsvp.html" class="nav-link">RSVP</a>
+<a href="instructions.html" class="nav-link">Instructions</a>
+<a href="registry.html" class="nav-link">Registry</a>
+<a href="gallery.html" class="nav-link active">Gallery</a>
+</nav>
+</div>
+</header>
+
+<main>
+<div class="wrap page-content">
+<h1>Gallery</h1>
+<p>Snap a photo, upload it here, and it'll show up below for everyone to see. Thank you for helping us collect memories from the day!</p>
+
+<div class="upload-box">
+  <label for="photo-input"><strong>Add a photo</strong></label>
+  <input type="file" id="photo-input" accept="image/*" multiple />
+  <button class="btn btn-primary" id="upload-btn">Upload</button>
+  <div id="upload-status"></div>
+</div>
+
+<div id="gallery-grid" class="gallery-grid">
+  <p class="gallery-empty">Loading photos&hellip;</p>
+</div>
+</div>
+</main>
+
+<div class="lightbox-overlay" id="lightbox">
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/gallery.js"></script>
+</body>
+</html>
